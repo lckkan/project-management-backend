@@ -1,0 +1,22 @@
+<?php
+
+use App\Http\Controllers\API\ProjectController;
+use App\Http\Controllers\API\TestController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use PHPUnit\Metadata\Test;
+
+Route::get('/user', function (Request $request) {
+    return $request->user();
+})->middleware('auth:sanctum');
+
+/*
+Route::get('/test', function() {
+    return response()->json(['message'=>'Message from test AP']);
+});
+*/
+
+Route::get('/test', [TestController::class, 'index']);
+
+Route::apiResource('project', ProjectController::class);
+
