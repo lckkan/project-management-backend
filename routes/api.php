@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\ProjectController;
 use App\Http\Controllers\API\TaskController;
 use App\Http\Controllers\API\TestController;
@@ -19,6 +20,11 @@ Route::get('/test', function() {
 
 Route::get('/test', [TestController::class, 'index']);
 
-Route::apiResource('projects', ProjectController::class);
 
-Route::apiResource('tasks', TaskController::class);
+Route::apiResource('projects', ProjectController::class)->middleware('auth:sanctum');
+Route::apiResource('tasks', TaskController::class)->middleware('auth:sanctum');
+
+
+Route::post('/register', [AuthController::class, 'register']); // Register API
+Route::post('/login', [AuthController::class, 'login']); // Login API
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum'); // Logout API

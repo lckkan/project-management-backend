@@ -24,12 +24,10 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         //
-
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255',
             'description' => 'nullable|string',
             'due_date' => 'nullable|date'
-
         ]);
 
         if ($validator->fails()) {
